@@ -10,6 +10,9 @@ const logger = require("morgan");
 
 //router
 const categoriesRouter = require("./app/api/v1/categories/router");
+const imagesRouter = require("./app/api/v1/images/router");
+const talentRouter = require("./app/api/v1/talents/router");
+
 const v1 = "/api/v1/cms";
 
 const notFoundMiddleware = require("./app/middlewares/not-found");
@@ -28,9 +31,13 @@ app.get("/", (req, res) => {
   });
 });
 
+//Router
 // app.use("/users", usersRouter);
 app.use(v1, categoriesRouter);
+app.use(v1, imagesRouter);
+app.use(v1, talentRouter);
 
+// middleware
 app.use(notFoundMiddleware);
 app.use(handleErrorMiddleware);
 
