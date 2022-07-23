@@ -62,7 +62,7 @@ const createEvents = async (req) => {
   const check = await Events.findOne({ title });
 
   // apa bila check true / data Events sudah ada maka kita tampilkan error bad request dengan message pembicara duplikat
-  if (check) throw new BadRequestError("judul event duplikat");
+  if (check) throw new BadRequestError("judul event sudah terdaftar");
 
   const result = await Events.create({
     title,
@@ -96,8 +96,7 @@ const getOneEvents = async (req) => {
       populate: { path: "image", select: "_id  name" },
     });
 
-  if (!result)
-    throw new NotFoundError(`Tidak ada pembicara dengan id :  ${id}`);
+  if (!result) throw new NotFoundError(`Tidak ada Acara dengan id :  ${id}`);
 
   return result;
 };
@@ -123,6 +122,16 @@ const updateEvents = async (req) => {
   await checkingCategories(category);
   await checkingTalents(talent);
 
+  //cari event berdasarkan field id
+  const checkEvent = await Events.findOne({
+    title,
+    _id: id,
+  });
+
+  // jika id result false / null maka akan menampilkan error `Tidak ada pembicara dengan id` yang dikirim client
+  if (!checkEvent)
+    throw new NotFoundError(`Tidak ada acara  dengan id :  ${id}`);
+
   // cari Events dengan field name dan id selain dari yang dikirim dari params
   const check = await Events.findOne({
     title,
@@ -130,7 +139,7 @@ const updateEvents = async (req) => {
   });
 
   // apa bila check true / data Events sudah ada maka kita tampilkan error bad request dengan message pembicara duplikat
-  if (check) throw new BadRequestError("judul event duplikat");
+  if (check) throw new BadRequestError("judul acara sudah terdaftar");
 
   const result = await Events.findOneAndUpdate(
     { _id: id },
@@ -150,9 +159,6 @@ const updateEvents = async (req) => {
     { new: true, runValidators: true }
   );
 
-  // jika id result false / null maka akan menampilkan error `Tidak ada pembicara dengan id` yang dikirim client
-  if (!result) throw new NotFoundError(`Tidak ada acara dengan id :  ${id}`);
-
   return result;
 };
 
@@ -163,8 +169,7 @@ const deleteEvents = async (req) => {
     _id: id,
   });
 
-  if (!result)
-    throw new NotFoundError(`Tidak ada pembicara dengan id :  ${id}`);
+  if (!result) throw new NotFoundError(`Tidak ada acara dengan id :  ${id}`);
 
   await result.remove();
 
