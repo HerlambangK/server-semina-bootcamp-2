@@ -1,16 +1,14 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
-const { model, Schema } = mongoose;
 
-let userSchema = Schema(
+const userSchema = new mongoose.Schema(
   {
     name: {
       type: String,
-      minlength: [3, "Panjang nama user minimal 3 karakter"],
-      maxLength: [50, "Panjang nama user maksimal 50 karakter"],
       required: [true, "Nama harus diisi"],
+      minlength: 3,
+      maxlength: 50,
     },
-
     email: {
       type: String,
       unique: true,
@@ -26,10 +24,9 @@ let userSchema = Schema(
       enum: ["admin", "organizer", "owner"],
       default: "admin",
     },
-
     organizer: {
       type: mongoose.Types.ObjectId,
-      ref: "Organizers",
+      ref: "Organizer",
       required: true,
     },
   },
@@ -49,4 +46,4 @@ userSchema.methods.comparePassword = async function (canditatePassword) {
   return isMatch;
 };
 
-module.exports = model("User", userSchema);
+module.exports = mongoose.model("User", userSchema);

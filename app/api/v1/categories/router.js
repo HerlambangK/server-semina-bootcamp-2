@@ -8,10 +8,23 @@ const { create, index, find, update, destroy } = require("./controller");
 //     data: data,
 //   });
 // });
-router.get("/categories", index);
-router.get("/categories/:id", find);
-router.put("/categories/:id", update);
-router.delete("/categories/:id", destroy);
-router.post("/categories", create);
+
+const {
+  authenticateUser,
+  authorizeRoles,
+} = require("../../../middlewares/auth");
+
+// app.use(authenticateUser);
+router.get("/categories", authenticateUser, authorizeRoles("organizer"), index);
+
+router.get(
+  "/categories/:id",
+  authenticateUser,
+  authorizeRoles("organizer"),
+  find
+);
+router.put("/categories/:id", authenticateUser, update);
+router.delete("/categories/:id", authenticateUser, destroy);
+router.post("/categories", authenticateUser, create);
 
 module.exports = router;

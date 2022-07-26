@@ -5,6 +5,8 @@ const { BadRequestError } = require("../../errors");
 const createOrganizer = async (req) => {
   const { organizer, role, email, password, confirmPassword, name } = req.body;
 
+  // console.log(req.body);
+
   if (password !== confirmPassword) {
     throw new BadRequestError("Password dan konfirmasi password tidak cocok ");
   }
@@ -15,15 +17,34 @@ const createOrganizer = async (req) => {
     email,
     name,
     password,
-    organizers: result.organizer,
+    organizer: result._id,
     role,
   });
 
-  delete Users._doc.password;
+  delete users._doc.password;
 
   return users;
 };
 
+const createUsers = async (req, res) => {
+  const { name, password, role, confirmPassword, email } = req.body;
+
+  if (password !== confirmPassword) {
+    throw new BadRequestError("Password dan Konfirmasi password tidak cocok");
+  }
+
+  const result = await Users.create({
+    name,
+    email,
+    organizer: req.user.organizer,
+    password,
+    role,
+  });
+
+  return result;
+};
+
 module.exports = {
   createOrganizer,
+  createUsers,
 };
