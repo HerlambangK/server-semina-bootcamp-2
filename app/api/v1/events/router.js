@@ -5,8 +5,10 @@ const {
   authenticateUser,
   authorizeRoles,
 } = require("../../../middlewares/auth");
- 
+
 //coba disini
+//
+//
 
 router.get("/events", authenticateUser, authorizeRoles("organizer"), index);
 router.get("/events/:id", authenticateUser, authorizeRoles("organizer"), find);
