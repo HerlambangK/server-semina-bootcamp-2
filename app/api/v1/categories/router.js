@@ -1,6 +1,10 @@
 const express = require("express");
 const router = express();
 const { create, index, find, update, destroy } = require("./controller");
+const {
+  authenticateUser,
+  authorizeRoles,
+} = require("../../../middlewares/auth");
 
 // router.get("/categories", (req, res) => {
 //   res.status(200).json({
@@ -9,12 +13,8 @@ const { create, index, find, update, destroy } = require("./controller");
 //   });
 // });
 
-const {
-  authenticateUser,
-  authorizeRoles,
-} = require("../../../middlewares/auth");
-
 // app.use(authenticateUser);
+
 router.get("/categories", authenticateUser, authorizeRoles("organizer"), index);
 
 router.get(

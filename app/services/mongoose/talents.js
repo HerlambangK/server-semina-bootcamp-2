@@ -9,7 +9,7 @@ const getAllTalents = async (req) => {
   const { keyword } = req.query;
 
   // let condition = { organizer: req.user.organizer };
-  let condition = {};
+  let condition = { organizer: req.user.organizer };
 
   if (keyword) {
     condition = { ...condition, name: { $regex: keyword, $options: "i" } };
