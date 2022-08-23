@@ -7,8 +7,7 @@ const {
 } = require("../../../middlewares/auth");
 
 //coba disini
-//
-//
+//sa
 
 router.get("/events", authenticateUser, authorizeRoles("organizer"), index);
 router.get("/events/:id", authenticateUser, authorizeRoles("organizer"), find);
