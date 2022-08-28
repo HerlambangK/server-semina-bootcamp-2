@@ -34,7 +34,7 @@ const createTalents = async (req) => {
 
   // cari talents dengan field name
   // const check = await Talents.findOne({ name, organizer: req.user.organizer });
-  const check = await Talents.findOne({ name });
+  const check = await Talents.findOne({ name, organizer: req.user.organizer });
 
   // apa bila check true / data talents sudah ada maka kita tampilkan error bad request dengan message pembicara sudah terdaftar
   if (check) throw new BadRequestError("pembicara sudah terdaftar");
@@ -43,7 +43,7 @@ const createTalents = async (req) => {
     name,
     image,
     role,
-    // organizer: req.user.organizer,
+    organizer: req.user.organizer,
   });
 
   return result;
