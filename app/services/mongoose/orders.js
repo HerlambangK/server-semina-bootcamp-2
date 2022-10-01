@@ -13,6 +13,9 @@ const getAllOrders = async (req) => {
     start.setHours(0, 0, 0);
     const end = new Date(endDate);
     end.setHours(23, 59, 59);
+
+    // console.log(start);
+    // console.log(end);
     condition = {
       ...condition,
       date: {
@@ -27,6 +30,10 @@ const getAllOrders = async (req) => {
     .skip(limit * (page - 1));
 
   const count = await Orders.countDocuments(condition);
+  // console.log("condition : ", condition);
+  // console.log("count : ", count);
+
+  //page:2 / 1 = 2
 
   return { data: result, pages: Math.ceil(count / limit), total: count };
 };
