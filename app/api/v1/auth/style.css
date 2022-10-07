@@ -1,0 +1,92 @@
+.as-card-base__ribbon--green,
+.as-card-full__ribbon--green,
+.as-card-list__ribbon--green,
+.as-card__ribbon--green {
+    background: #00bfa6
+}
+
+.as-card-base__ribbon--green:after,
+.as-card-full__ribbon--green:after,
+.as-card-list__ribbon--green:after,
+.as-card__ribbon--green:after {
+    border-left: 15px solid #00bfa6
+}
+
+.as-card-base__ribbon--red,
+.as-card-full__ribbon--red,
+.as-card-list__ribbon--red,
+.as-card__ribbon--red {
+    background: #f43636
+}
+
+.as-card-base__ribbon--red:after,
+.as-card-full__ribbon--red:after,
+.as-card-list__ribbon--red:after,
+.as-card__ribbon--red:after {
+    border-left: 15px solid #f43636
+}
+
+.as-card-base__best-seller,
+.as-card-full__best-seller,
+.as-card-list__best-seller,
+.as-card__best-seller {
+    background: #ff9800;
+    border-radius: 8px;
+    color: #fff;
+    display: none;
+    left: 50%;
+    padding: 14px 78px;
+    position: absolute;
+    top: -86px;
+    transform: translateX(-50%);
+    width: 100%
+}
+
+@media(min-width:768px) {
+
+    .as-card-base__best-seller,
+    .as-card-full__best-seller,
+    .as-card-list__best-seller,
+    .as-card__best-seller {
+        display: inline-block
+    }
+}
+
+.as-card-base__best-seller:after,
+.as-card-full__best-seller:after,
+.as-card-list__best-seller:after,
+.as-card__best-seller:after {
+    border: 16px solid transparent;
+    border-top-color: #007aff;
+    content: "";
+    left: 50%;
+    position: absolute;
+    top: 100%;
+    transform: translateX(-50%)
+}
+
+.as-card-base__label,
+.as-card-full__label,
+.as-card-list__label,
+.as-card-top-label__label,
+.as-card__label {
+    border-top-left-radius: 13px;
+    border-top-right-radius: 13px;
+    color: #fff;
+    display: inline-block;
+    left: 50%;
+    padding: 12px 0;
+    position: absolute;
+    text-align: center;
+    top: 0;
+    transform: translateX(-50%);
+    width: 100%
+}
+
+.as-card-base__label--green,
+.as-card-full__label--green,
+.as-card-list__label--green,
+.as-card-top-label__label--green,
+.as-card__label--green {
+    background: #00bfa6
+}
