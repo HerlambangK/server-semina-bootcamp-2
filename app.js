@@ -37,6 +37,7 @@ app.get("/", (req, res) => {
 
 //Router
 // app.use("/users", usersRouter);
+// app.use(/api/v1/cms, ./app/api/v1/categories/router);
 app.use(v1, categoriesRouter);
 app.use(v1, imagesRouter);
 app.use(v1, talentRouter);
