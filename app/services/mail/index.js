@@ -27,11 +27,13 @@ const otpMail = async (email, data) => {
     let template = fs.readFileSync("app/views/email/otp.html", "utf8");
 
     let message = {
-      from: gmail,
+      from: `Nanjaya ${gmail}`,
       to: email,
       subject: "Otp for registration is: ",
       html: Mustache.render(template, data),
     };
+    // console.log(data);
+    // console.log(message);
 
     return await transporter.sendMail(message);
   } catch (ex) {
@@ -39,4 +41,23 @@ const otpMail = async (email, data) => {
   }
 };
 
-module.exports = { otpMail };
+// send invoice
+const invoiceMail = async (email, data) => {
+  try {
+    let template = fs.readFileSync("app/views/email/invoice.html", "utf-8");
+
+    let message = {
+      // from: gmail,
+      from: `Nanjaya ${gmail}`,
+      to: email,
+      subject: "Invoice payment Event",
+      html: Mustache.render(template, data),
+    };
+    console.log(data);
+    return await transporter.sendMail(message);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+module.exports = { otpMail, invoiceMail };
